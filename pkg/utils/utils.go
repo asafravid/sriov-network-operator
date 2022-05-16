@@ -373,19 +373,21 @@ func configSriovDevice(iface *sriovnetworkv1.Interface, ifaceStatus *sriovnetwor
 }
 
 func setSriovNumVfs(pciAddr string, numVfs int) error {
-	glog.V(2).Infof("setSriovNumVfs(): set NumVfs for device %s", pciAddr)
-	numVfsFilePath := filepath.Join(sysBusPciDevices, pciAddr, numVfsFile)
-	bs := []byte(strconv.Itoa(numVfs))
-	err := ioutil.WriteFile(numVfsFilePath, []byte("0"), os.ModeAppend)
-	if err != nil {
-		glog.Warningf("setSriovNumVfs(): fail to reset NumVfs file %s", numVfsFilePath)
-		return err
-	}
-	err = ioutil.WriteFile(numVfsFilePath, bs, os.ModeAppend)
-	if err != nil {
-		glog.Warningf("setSriovNumVfs(): fail to set NumVfs file %s", numVfsFilePath)
-		return err
-	}
+	/*
+		glog.V(2).Infof("setSriovNumVfs(): set NumVfs for device %s", pciAddr)
+		numVfsFilePath := filepath.Join(sysBusPciDevices, pciAddr, numVfsFile)
+		bs := []byte(strconv.Itoa(numVfs))
+		err := ioutil.WriteFile(numVfsFilePath, []byte("0"), os.ModeAppend)
+		if err != nil {
+			glog.Warningf("setSriovNumVfs(): fail to reset NumVfs file %s", numVfsFilePath)
+			return err
+		}
+		err = ioutil.WriteFile(numVfsFilePath, bs, os.ModeAppend)
+		if err != nil {
+			glog.Warningf("setSriovNumVfs(): fail to set NumVfs file %s", numVfsFilePath)
+			return err
+		}
+	*/
 	return nil
 }
 
