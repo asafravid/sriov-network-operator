@@ -15,4 +15,4 @@ spec:
       rootDevices:
       - 0000:81:00.0
       vendor: "177d"
-  deviceType: vfio-pci
+  deviceType: netdevice
