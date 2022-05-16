@@ -33,7 +33,7 @@ spec:
           image: {{ .Values.images.operator }}
           command:
             - sriov-network-operator
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: 100m

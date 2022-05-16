@@ -1,0 +1,18 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: policy-octeon
+  namespace: sriov-network-operator
+spec:
+  nodeSelector:
+    feature.node.kubernetes.io/network-sriov.capable: "true"
+  resourceName: marvell_octeon
+  priority: 99
+  mtu: 9000
+  numVfs: 3
+  nicSelector:
+      deviceID: "b200"
+      rootDevices:
+      - 0000:81:00.0
+      vendor: "177d"
+  deviceType: vfio-pci
