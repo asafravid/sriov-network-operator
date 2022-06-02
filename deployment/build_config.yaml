@@ -1,0 +1,70 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: octeon-driver-container
+  name: octeon-driver-container
+  namespace: octeon-test-namespace
+spec: {}
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: octeon-driver
+  name: octeon-driver
+  namespace: octeon-test-namespace
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+  runPolicy: "Serial"
+  triggers:
+    - type: "ConfigChange"
+    - type: "ImageChange"
+  source:
+    git:
+      ref: "master"
+      uri: "https://github.com/openshift-psap/kvc-simple-kmod.git"
+    type: Git
+    dockerfile: >
+      FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8705564ee52c5b655529860687f73db78daef4eaa54f5fdd3160cfbfc4aac438
+
+
+      WORKDIR /build/
+
+
+      RUN yum -y install git make sudo gcc bzip2 bc \
+
+      && yum clean all \
+
+      && rm -rf /var/cache/dnf
+
+
+      ARG KMODVER
+
+
+      # Grab the software from upstream
+
+      WORKDIR /build/
+
+      RUN wget http://10.5.210.12/pcie_ep_ref.tar.bz2
+
+      RUN mkdir drivers && tar -xf pcie_ep_ref.tar.bz2 -C ./drivers/
+
+      RUN mv /lib/modules/4.18.0-305.34.2.el8_4.x86_64 \
+      /lib/modules/4.18.0-305.40.2.el8_4.x86_64
+      
+      RUN cd drivers/pcie_ep_ref/pcie_ep_octeontx-sdk11-devel/host/ 
+      
+      RUN make && make COMPILEFOR=OCTEON_VF
+
+strategy:
+    dockerStrategy:
+      buildArgs:
+        - name: KMODVER
+          value: DEMO
+
+  output:
+    to:
+      kind: ImageStreamTag
+      name: octeon-driver-container:demo

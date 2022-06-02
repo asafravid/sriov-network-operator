@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: testpod1
+  name: demopod2
   namespace: sriov-network-operator
   annotations:
     k8s.v1.cni.cncf.io/networks: sriov-network-operator/example-sriovnetwork
