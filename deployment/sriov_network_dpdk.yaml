@@ -1,0 +1,16 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: example-sriovnetwork-dpdk
+  namespace: sriov-network-operator
+spec:
+  config: '{
+  "type": "sriov",
+  "cniVersion": "0.3.1",
+  "name": "example-sriovnetwork-dpdk",
+  "vlan": 100,
+  "vlanQoS": 1,
+  "max_tx_rate": 100,
+  "spoofchk": "off",
+  "trust": "on"
+}'

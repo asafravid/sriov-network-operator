@@ -1,12 +1,12 @@
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  name: policy-octeon
+  name: policy-octeon-dpdk
   namespace: sriov-network-operator
 spec:
   nodeSelector:
     feature.node.kubernetes.io/network-sriov.capable: "true"
-  resourceName: marvell_octeon
+  resourceName: marvell_octeon_dpdk
   priority: 99
   mtu: 9000
   numVfs: 7 
@@ -15,5 +15,5 @@ spec:
       rootDevices:
       - 0000:81:00.0
       vendor: "177d"
-      pfNames: ["ens259f0#0-3"]
-  deviceType: netdevice
+      pfNames: ["ens259f0#4-6"]
+  deviceType: vfio-pci

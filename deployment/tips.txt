@@ -1,0 +1,20 @@
+apt-get update
+apt-get install net-tools
+apt install iproute2
+apt-get install pciutils
+
+
+
+
+
+insmod ./drivers/legacy/modules/driver/src/host/linux/kernel/drv/octeon_drv.ko sdp_packet_mode=loop num_vfs=7
+
+insmod ./drivers/legacy/modules/driver/src/host/linux/kernel/drv/octvf/octeon_vf_drv.ko sdp_packet_mode=loop
+
+insmod ./drivers/legacy/modules/driver/src/host/linux/kernel/drv/octnic/octnic.ko
+
+insmod ./drivers/legacy/modules/driver/src/host/linux/kernel/drv/octnic/oct_vf_nic.ko
+
+
+
+echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode

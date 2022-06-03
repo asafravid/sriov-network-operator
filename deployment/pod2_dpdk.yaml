@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod2-dpdk
+  namespace: sriov-network-operator
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-network-operator/example-sriovnetwork-dpdk
+spec:
+  containers:
+  - name: ubuntu 
+    image: docker.io/navadiaev/ubuntu_dpdk
+    namespace: sroiv-network-operator
+    imagePullPolicy: IfNotPresent
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 300000; done;" ]
