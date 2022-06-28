@@ -15,5 +15,5 @@ spec:
       rootDevices:
       - 0000:61:00.0
       vendor: "177d"
-      pfNames: ["ens2f0#0-3"]
+      pfNames: ["ens2f0#0"]
   deviceType: netdevice
