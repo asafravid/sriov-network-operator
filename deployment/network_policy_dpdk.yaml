@@ -13,7 +13,7 @@ spec:
   nicSelector:
       deviceID: "b200"
       rootDevices:
-      - 0000:81:00.0
+      - 0000:61:00.0
       vendor: "177d"
-      pfNames: ["ens259f0#4-6"]
+      pfNames: ["ens2f0#1"]
   deviceType: vfio-pci
